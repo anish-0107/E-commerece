@@ -1,0 +1,41 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../Auth"
+		},
+		{
+			"path": "../../core"
+		},
+		{
+			"path": "../../Customer"
+		},
+		{
+			"path": "../../Customer/cart"
+		},
+		{
+			"path": "../../Customer/orders"
+		},
+		{
+			"path": "../../Customer/orders-details"
+		},
+		{
+			"path": "../../Customer/product-detils"
+		},
+		{
+			"path": "../../Customer/products"
+		},
+		{
+			"path": "../../Customer/profile"
+		},
+		{
+			"path": "../../models"
+		},
+		{
+			"path": "../../shared"
+		}
+	],
+	"settings": {}
+}

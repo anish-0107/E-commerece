@@ -1,0 +1,9 @@
+@if (shareServ.isShown$ | async) {
+  <div class="error-backdrop">
+    <div class="error-modal">
+      <h2>System Error</h2>
+      <p>{{shareServ.showmess}}</p>
+      <button class="close-btn" (click)="shareServ.close()"> Dismiss </button>
+    </div>
+  </div>
+}

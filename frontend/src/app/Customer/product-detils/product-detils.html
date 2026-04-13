@@ -1,0 +1,50 @@
+@if(prodDetails){
+<div class="product-grid">
+  <div class="product-card">
+    <div class="image-container">
+      <img [src]="getImageUrl(prodDetails)" [alt]="prodDetails.name"
+        onerror="this.src='https://placehold.co/400x300?text=No+Image'">
+      @if (prodDetails.Stockquantity <= 5) { <span class="badge low-stock">Only {{ prodDetails.Stockquantity }}
+        left!</span>
+        } @else {
+        <span class="badge in-stock">In Stock</span>
+        }
+    </div>
+
+    <div class="card-content">
+      <div class="category-path">
+        <!-- {{ prodDetails.category.name }} &rsaquo; {{ prodDetails.category.name }} -->
+      </div>
+
+      <h2 class="product-name">{{ prodDetails.name }}</h2>
+      <p class="product-description">{{ prodDetails.description }}</p>
+
+      <div class="card-footer">
+        <span class="price">₹{{ prodDetails.price }}</span>
+        <div class="card-footer">
+  
+          <button class="btn-add" (click)="addToCart()">Add to Cart</button>
+
+          <div class="share-wrapper">
+            <button class="btn-share" (click)="sharepath()">
+              <span class="icon">🔗</span> Share
+            </button>
+
+            @if(isCopied) {
+            <div class="copy-toast">Link Copied!</div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+}
+
+@if (showMessage) {
+  <div class="obsidian-toast" [class.error]="isError">
+    <span class="toast-icon">✨</span>
+    <p class="toast-text">{{ toastMessage }}</p>
+    <button class="toast-close" (click)="showMessage = false">×</button>
+  </div>
+}

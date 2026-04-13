@@ -1,0 +1,50 @@
+<div class="auth-container">
+  <section class="auth-card">
+    <h2>Create Account</h2>
+    <p>Join us by filling out the details below.</p>
+
+    <form [formGroup]="registerForm" (ngSubmit)="register()" class="vertical-form">
+      
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input 
+          type="text" 
+          id="name" 
+          formControlName="name" 
+          placeholder="John Doe"
+          [class.error]="registerForm.get('name')?.invalid && registerForm.get('name')?.touched">
+      </div>
+
+      <div class="form-group">
+        <label for="reg-email">Email Address</label>
+        <input 
+          type="email" 
+          id="reg-email" 
+          formControlName="email" 
+          placeholder="anish@example.com"
+          [class.error]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+      </div>
+
+      <div class="form-group">
+        <label for="reg-pass">Password</label>
+        <input 
+          type="password" 
+          id="reg-pass" 
+          formControlName="passowrd" 
+          placeholder="••••••••"
+          [class.error]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+      </div>
+
+      <button 
+        type="submit" 
+        class="btn-primary" 
+        [disabled]="registerForm.invalid">
+        Register Now
+      </button>
+
+      <div class="auth-footer">
+        <p>Already have an account? <button routerLink="/auth/login">Login here</button></p>
+      </div>
+    </form>
+  </section>
+</div>

@@ -1,0 +1,115 @@
+<div class="cart-container">
+  <div class="cart-header">
+    <h2>Your Shopping Cart ({{ cartItems.length }} items)</h2>
+    <button class="clear-btn" (click)="clearCart()">clear cart</button>
+  </div>
+
+  <div class="cart-list">
+    @for (item of cartItems; track item.id) {
+      <div class="cart-item">
+        <div class="item-image">
+          <img [src]="'http://localhost:3005' + item.product.imagePath" alt="product">
+        </div>
+
+        <div class="item-details">
+          <h3>{{ item.product.name }}</h3>
+          <p class="item-category">{{ item.product.category?.name }}</p>
+          <p class="item-price">₹{{ item.product.price }}</p>
+        </div>
+
+        <div class="item-quantity">
+          <button class="qty-btn" (click)="updateQty(item.id, -1)">-</button>
+          <span class="qty-value">{{ item.quantity }}</span>
+          <button class="qty-btn" (click)="updateQty(item.id, 1)">+</button>
+        </div>
+
+        <div class="item-actions">
+          <p class="item-subtotal">₹{{ item.product.price * item.quantity }}</p>
+          <button class="btn-remove" (click)="deleteItemFormCart(item.id)">
+            <span class="icon">🗑️</span> Remove
+          </button>
+        </div>
+      </div>
+    } @empty {
+      <div class="empty-cart">
+        <p>Your cart is empty.</p>
+        <button class="btn-primary" routerLink="/user/main">Go Shopping</button>
+      </div>
+    }
+  </div>
+
+  @if (cartItems.length > 0) {
+    <div class="cart-summary">
+      <div class="summary-row">
+        <span>Total Amount:</span>
+        <span class="total-price">{{total}}</span>
+      </div>
+      <button class="btn-checkout" (click)="beforePlaceOrder()">Proceed to Checkout</button>
+    </div>
+  }
+  
+</div>
+
+@if(isShownForm){
+    <div class="checkout-container">
+  <h3>Select Payment Method</h3>
+  <button (click)="closepopup()">close</button>
+  <form [formGroup]="placeOrderForm" (ngSubmit)="placeOrder()">
+    <div class="payment-options">
+      
+      <label class="payment-card" [class.selected]="placeOrderForm.get('payMethod')?.value === 'cash'">
+        <input type="radio" formControlName="payMethod" value="cash">
+        <div class="option-content">
+          <span class="icon">💵</span>
+          <div class="details">
+            <span class="title">Cash on Delivery</span>
+            <small>Pay when you receive the order</small>
+          </div>
+        </div>
+      </label>
+
+      <label class="payment-card" [class.selected]="placeOrderForm.get('payMethod')?.value === 'credit'">
+        <input type="radio" formControlName="payMethod" value="credit">
+        <div class="option-content">
+          <span class="icon">💳</span>
+          <div class="details">
+            <span class="title">Credit Card</span>
+            <small>Visa, Mastercard, Amex</small>
+          </div>
+        </div>
+      </label>
+
+      <label class="payment-card" [class.selected]="placeOrderForm.get('payMethod')?.value === 'debit'">
+        <input type="radio" formControlName="payMethod" value="debit">
+        <div class="option-content">
+          <span class="icon">🏦</span>
+          <div class="details">
+            <span class="title">Debit Card</span>
+            <small>Direct from bank account</small>
+          </div>
+        </div>
+      </label>
+
+      <label class="payment-card" [class.selected]="placeOrderForm.get('payMethod')?.value === 'upi'">
+        <input type="radio" formControlName="payMethod" value="upi">
+        <div class="option-content">
+          <span class="icon">📱</span>
+          <div class="details">
+            <span class="title">UPI Payment</span>
+            <small>Google Pay, PhonePe, Paytm</small>
+          </div>
+        </div>
+      </label>
+
+    </div>
+
+    @if (placeOrderForm.get('payMethod')?.invalid && placeOrderForm.get('payMethod')?.touched) {
+      <p class="error-text">Please select a payment method to continue.</p>
+    }
+
+    <button type="submit" class="btn-place-order" [disabled]="placeOrderForm.invalid">
+      Place Order
+    </button>
+  </form>
+</div>
+}

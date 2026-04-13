@@ -1,0 +1,39 @@
+<nav class="main-nav">
+  <div class="nav-container">
+
+    <div class="brand">
+      <span class="logo-icon">📚</span>
+      <span class="logo-text"><span>E Commerce</span></span>
+    </div>
+
+    @if(currentUserData) {
+
+    @if(currentUserData.role === 'admin'){
+    <div class="nav-links">
+      <a routerLink="/admin/products" routerLinkActive="active">Products</a>
+      <a routerLink="/admin/addtype" routerLinkActive="active">Categories</a>
+      <a routerLink="/admin/dashboard" routerLinkActive="active">Orders</a>
+      <a routerLink="/admin/user" routerLinkActive="active">Users</a>
+      <button class="admin-logout-btn" (click)="logout()">Logout</button>
+    </div>
+    }
+    @else if(currentUserData.role === "user"){
+    <div class="nav-links">
+      <a routerLink="/user/main">Products</a>
+      <a routerLink="/user/cart">Cart</a>
+      <a routerLink="/user/order">order</a>
+      <a routerLink="/auth/profile">profile</a>
+    </div>
+    }
+    } @else {
+    <div class="nav-actions">
+      <div class="nav-links">
+        <a routerLink="/user/main">Products</a>
+        <a routerLink="/auth/register" class="btn-login">Register</a>
+        <a routerLink="/auth/login" class="btn-login">Login</a>
+      </div>
+    </div>
+    }
+
+  </div>
+</nav>

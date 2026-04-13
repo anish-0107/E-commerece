@@ -1,0 +1,19 @@
+<div class="layout-wrapper">
+
+  <aside class="sidebar-zone">
+    <app-sidebar (filterChanged)="onSidebarFilter($event)"></app-sidebar>
+  </aside>
+
+  <main class="content-zone">
+
+
+
+    <app-product-card [products]="allProducts" (addCart)="addToCart($event)">
+    </app-product-card>
+    <div class="pagination">
+      <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Prev</button>
+      <span>Page {{currentPage}}</span>
+      <button (click)="changePage(currentPage + 1)" [disabled]="(currentPage * pageSize) >= totalCount">Next</button>
+    </div>
+  </main>
+</div>

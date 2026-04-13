@@ -1,0 +1,100 @@
+@if(currentUser){
+<div class="profile-container">
+  <div class="profile-header">
+    <h2>My Account</h2>
+    </div>
+
+  <div class="profile-card">
+    <div class="user-info-section">
+      <div class="profile-row">
+        <span class="label">User ID</span>
+        <span class="value">#{{ currentUser.id }}</span>
+      </div>
+
+      <div class="profile-row">
+        <span class="label">Full Name</span>
+        <span class="value">{{ currentUser.name }}</span>
+      </div>
+
+      <div class="profile-row">
+        <span class="label">Email Address</span>
+        <span class="value">{{ currentUser.email }}</span>
+      </div>
+
+      <div class="profile-row">
+        <span class="label">Account Role</span>
+        <span class="badge" [ngClass]="currentUser.role">
+          {{ currentUser.role | uppercase }}
+        </span>
+      </div>
+
+      <div class="profile-row">
+        <span class="label">Status</span>
+        <span class="status-tag" [class.locked]="currentUser.isLocked">
+          {{ currentUser.isLocked ? 'Locked' : 'Active' }}
+        </span>
+      </div>
+    </div>
+
+    <div class="profile-actions">
+      <button class="btn btn-outline" (click)="showPassForm()">
+        <span class="icon">🔒</span> Reset Password
+      </button>
+      <button class="btn btn-danger" (click)="logout()">
+        <span class="icon">⏻</span> Logout
+      </button>
+    </div>
+  </div>
+</div>
+}
+
+@if(changePass) {
+<div class="password-modal-container">
+  <div class="password-card">
+    <div class="password-header">
+      <div class="header-content">
+        <span class="lock-icon">🔒</span>
+        <h3>Security Update</h3>
+      </div>
+      <button class="btn-close" (click)="closePassForm()">×</button>
+    </div>
+
+    <p class="security-note">Ensure your new password is at least 8 characters long with a mix of letters and numbers.</p>
+
+    <form [formGroup]="changePassForm" (ngSubmit)="onChangePassword()" class="password-form">
+      
+      <div class="form-group">
+        <label>Current Password</label>
+        <div class="input-wrapper">
+          <input type="password" formControlName="oldPassword" placeholder="••••••••">
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="form-group">
+        <label>New Password</label>
+        <div class="input-wrapper">
+          <input type="password" formControlName="newPassword" placeholder="Minimum 8 characters">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Confirm New Password</label>
+        <div class="input-wrapper">
+          <input type="password" formControlName="confirmPassword" placeholder="Repeat new password">
+        </div>
+        @if(changePassForm.get('confirmPassword')?.touched && changePassForm.errors?.['mismatch']) {
+          <small class="error-text">Passwords do not match</small>
+        }
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-reset" [disabled]="changePassForm.invalid">
+          Update Security Keys
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+}

@@ -1,0 +1,65 @@
+/* Darkens the background and prevents clicking items behind it */
+.error-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensures it stays on top */
+  backdrop-filter: blur(4px); /* Modern frosted glass effect */
+}
+
+/* The actual popup box */
+.error-modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.error-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  margin: 0;
+  color: #d32f2f;
+  font-family: sans-serif;
+}
+
+p {
+  color: #555;
+  margin: 1rem 0 2rem;
+  line-height: 1.5;
+}
+
+/* Styled Dismiss Button */
+.close-btn {
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.close-btn:hover {
+  background-color: #b71c1c;
+}
+
+/* Smooth Entrance Animation */
+@keyframes popIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

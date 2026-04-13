@@ -1,0 +1,132 @@
+/* Main Navbar Container */
+.main-nav {
+  /* Using a dark transparent background with blur for a "Glassmorphism" look */
+  background: rgba(11, 10, 15, 0.85); 
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #2a1b4d; /* Subtle Violet border */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 0.75rem 0;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+}
+
+/* Brand/Logo */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-text {
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: #ffffff; /* Pure white for logo */
+  letter-spacing: -0.5px;
+}
+
+.logo-text span {
+  color: #a855f7; /* VIBRANT VIOLET */
+  text-shadow: 0 0 10px rgba(168, 85, 247, 0.5); /* Subtle glow */
+}
+
+/* Links */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #9ca3af; /* Muted grey-violet */
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover, 
+.nav-links a.active {
+  color: #a855f7; /* Violet on hover */
+}
+
+/* Actions/Buttons */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Profile Button - Transparent with Violet border */
+.btn-profile {
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #d8b4fe; /* Light Lavender */
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: rgba(168, 85, 247, 0.1); /* Very faint violet tint */
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  transition: all 0.2s;
+}
+
+.btn-profile:hover {
+  background: rgba(168, 85, 247, 0.2);
+  border-color: #a855f7;
+  color: #ffffff;
+}
+
+/* Logout Button - Solid Violet */
+.btn-logout {
+  background: #8b5cf6; /* SOLID VIOLET */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+}
+
+.btn-logout:hover {
+  background: #a855f7; /* Brighter violet */
+  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; 
+  }
+  .main-nav {
+    padding: 0.5rem 0;
+  }
+}
+.admin-logout-btn {
+  background: rgba(239, 68, 68, 0.1); /* Subtle red tint */
+  color: #ef4444; /* Soft Red */
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-logout-btn:hover {
+  background: #ef4444;
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+  border-color: #ef4444;
+}

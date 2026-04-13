@@ -1,0 +1,144 @@
+<div class="layout-wrapper">
+  <aside class="sidebar-zone">
+    <app-sidebar (filterChanged)="onSideBarFilter($event)"></app-sidebar>
+  </aside>
+
+  <main class="content-zone">
+
+    <div class="header-actions">
+      <h2>Product Management</h2>
+      <button class="btn-primary" (click)="showAddForm()">+ New Product</button>
+    </div>
+
+    <hr class="separator">
+
+    <app-product-card [products]="allProducts" (delete)="deleteProduct($event)" (edit)="editProduct($event)">
+    </app-product-card>
+    <div class="pagination">
+      <button (click)="changePage(currentPage -1)" [disabled]="currentPage === 1">Prev</button>
+      <span>Page {{currentPage}}</span>
+      <button (click)="changePage(currentPage + 1)" [disabled]="(currentPage * pageSize) >= totalCount">Next</button>
+    </div>
+
+    @if(editForm) {
+    <div class="add-container edit-mode">
+      <div class="form-header">
+        <h3>Update Product: {{ selectProduct?.name }}</h3>
+        <button class="btn-close" (click)="cancelEdit()">×</button>
+      </div>
+
+      <form [formGroup]="UpdateProductForm" (ngSubmit)="onUpdate()" class="form-inline">
+
+        <div class="form-group">
+          <label for="editName">Product Name</label>
+          <input type="text" id="editName" formControlName="name"
+            [class.invalid]="UpdateProductForm.get('name')?.invalid && UpdateProductForm.get('name')?.touched">
+        </div>
+
+        <div class="form-group">
+          <label for="editPrice">Price ($)</label>
+          <input type="number" id="editPrice" formControlName="price">
+        </div>
+
+        <div class="form-group">
+          <label for="editStock">Stock Quantity</label>
+          <input type="number" id="editStock" formControlName="Stockquantity">
+        </div>
+
+        <div class="form-group">
+          <label for="editSubCat">Sub-Category</label>
+          <select id="editSubCat" formControlName="subcategoryId">
+            <option value="" disabled>Select Sub-Category</option>
+            @for(sub of allCate; track sub.id) {
+            <option [value]="sub.id">{{ sub.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="editImage">Update Image (Optional)</label>
+          <input type="file" id="editImage" (change)="onFileSelected($event)" accept="image/*" class="file-input">
+          @if(selectProduct?.imagePath) {
+          <small class="current-path">Current: {{ selectProduct.imagePath.split('/').pop() }}</small>
+          }
+        </div>
+
+        <div class="form-group full-width">
+          <label for="editDesc">Description</label>
+          <textarea id="editDesc" formControlName="description"></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" [disabled]="UpdateProductForm.invalid || UpdateProductForm.pristine" class="btn-add">
+            Update Product
+          </button>
+          <button type="button" class="btn-cancel" (click)="cancelEdit()">Cancel</button>
+        </div>
+      </form>
+    </div>
+    }
+
+    @if(addform){
+    <div class="add-container-modal">
+      <form [formGroup]="addProductForm" (ngSubmit)="addProduct()" class="form-inline">
+
+        <div class="form-group-add">
+          <label for="name">Product Name</label>
+          <input type="text" id="name" formControlName="name" placeholder="e.g. iPhone 15 Pro"
+            [class.invalid]="addProductForm.get('name')?.invalid && addProductForm.get('name')?.touched">
+        </div>
+
+        <div class="form-group-add">
+          <label for="price">Price ($)</label>
+          <input type="number" id="price" formControlName="price" placeholder="999.99"
+            [class.invalid]="addProductForm.get('price')?.invalid && addProductForm.get('price')?.touched">
+        </div>
+
+        <div class="form-group-add">
+          <label for="stock">Stock Quantity</label>
+          <input type="number" id="stock" formControlName="Stockquantity" placeholder="50"
+            [class.invalid]="addProductForm.get('Stockquantity')?.invalid && addProductForm.get('StockQuantity')?.touched">
+        </div>
+
+        <div class="form-group-add">
+          <label for="subCat">Sub-Category</label>
+          <select id="subCat" formControlName="subcategoryId"
+            [class.invalid]="addProductForm.get('subcategoryId')?.invalid && addProductForm.get('subCategory')?.touched">
+            <option value="" disabled selected>Select Sub-Category</option>
+            @for(sub of allCate; track sub.id) {
+            <option [value]="sub.id">{{ sub.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="form-group-add">
+          <label for="image">Product Image</label>
+          <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*" class="file-input">
+
+          @if(selectedFileName) {
+          <small class="text-success">Selected: {{ selectedFileName }}</small>
+          }
+        </div>
+
+        <div class="form-group full-width">
+          <label for="desc">Description</label>
+          <textarea id="desc" formControlName="description" placeholder="Enter product details..."
+            [class.invalid]="addProductForm.get('description')?.invalid && addProductForm.get('description')?.touched"></textarea>
+          <small class="char-count">
+            {{ addProductForm.get('description')?.value?.length || 0 }} / 100
+          </small>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" [disabled]="addProductForm.invalid" class="btn-add">
+            Add Product
+          </button>
+        </div>
+        <button type="button" (click)="closeForm()" class="cancel-btn">
+          Cancel
+        </button>
+      </form>
+    </div>
+    }
+  </main>
+</div>

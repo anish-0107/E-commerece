@@ -1,0 +1,133 @@
+/* Full screen black backdrop */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+  padding: 20px;
+}
+
+/* The Obsidian Card */
+.auth-card {
+  background-color: #08080a;
+  width: 100%;
+  max-width: 450px; /* Slightly wider for registration */
+  padding: 40px;
+  border-radius: 24px;
+  border: 1px solid #1f1b2e;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+h2 {
+  color: #ffffff;
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+p {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  margin-bottom: 30px;
+}
+
+/* Form Structure */
+.vertical-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  color: #a78bfa; /* Violet labels */
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+/* Obsidian Inputs */
+input {
+  background-color: #050505;
+  border: 1px solid #2a1b4d;
+  color: #ffffff;
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.15);
+  background-color: #0a0a0f;
+}
+
+/* Validation Styling */
+input.error {
+  border-color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.02);
+}
+
+/* Primary Violet Button */
+.btn-primary {
+  background: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%);
+  color: #ffffff;
+  border: none;
+  padding: 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
+}
+
+.btn-primary:disabled {
+  background: #1f1d2e;
+  color: #4b5563;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Footer & Navigation Link */
+.auth-footer {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #1f1b2e;
+}
+
+.auth-footer p {
+  font-size: 0.85rem;
+  margin-bottom: 0;
+}
+
+.auth-footer button {
+  background: none;
+  border: none;
+  color: #8b5cf6;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0 5px;
+  transition: color 0.2s;
+}
+
+.auth-footer button:hover {
+  color: #a78bfa;
+  text-decoration: underline;
+}

@@ -1,0 +1,247 @@
+/* --- PROFILE CONTAINER --- */
+.profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.profile-header h2 {
+  color: #ffffff;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  letter-spacing: -0.5px;
+}
+
+/* --- THE PROFILE CARD --- */
+.profile-card {
+  background-color: #08080a;
+  border: 1px solid #1f1b2e;
+  border-radius: 24px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.user-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #161421;
+}
+
+.profile-row:last-child {
+  border-bottom: none;
+}
+
+.profile-row .label {
+  color: #64748b;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.profile-row .value {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* --- BADGES & TAGS --- */
+.badge {
+  background: rgba(139, 92, 246, 0.1);
+  color: #a78bfa;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.status-tag {
+  color: #10b981;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.status-tag.locked {
+  color: #ef4444;
+}
+
+/* --- PROFILE ACTIONS (Buttons) --- */
+.profile-actions {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid #2a1b4d;
+  color: #ffffff;
+}
+
+.btn-outline:hover {
+  background: #161421;
+  border-color: #8b5cf6;
+}
+
+.btn-danger {
+  background: transparent;
+  border: 1px solid #ef4444;
+  color: #ef4444;
+  margin-left: auto; /* Push logout to the right */
+}
+
+.btn-danger:hover {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+/* --- PASSWORD MODAL --- */
+.password-modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.password-card {
+  background-color: #0d0b14;
+  width: 100%;
+  max-width: 450px;
+  padding: 30px;
+  border-radius: 24px;
+  border: 1px solid #3c2a6e;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  animation: modalPop 0.3s ease-out;
+}
+
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.password-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.password-header h3 {
+  color: #ffffff;
+  margin: 0;
+}
+
+.lock-icon { font-size: 1.2rem; }
+
+.btn-close {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.security-note {
+  color: #94a3b8;
+  font-size: 0.8rem;
+  margin-bottom: 25px;
+  line-height: 1.4;
+}
+
+/* --- PASSWORD FORM --- */
+.password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.divider {
+  height: 1px;
+  background: #1f1b2e;
+  margin: 5px 0;
+}
+
+.password-form label {
+  color: #a78bfa;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.input-wrapper input {
+  width: 100%;
+  background: #000000;
+  border: 1px solid #2a1b4d;
+  color: #ffffff;
+  padding: 12px;
+  border-radius: 10px;
+  transition: border 0.3s;
+}
+
+.input-wrapper input:focus {
+  outline: none;
+  border-color: #8b5cf6;
+}
+
+.error-text {
+  color: #ef4444;
+  font-size: 0.75rem;
+  margin-top: 5px;
+  display: block;
+}
+
+.btn-reset {
+  width: 100%;
+  background: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn-reset:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

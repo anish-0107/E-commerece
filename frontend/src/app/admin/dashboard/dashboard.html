@@ -1,0 +1,38 @@
+<div class="order-history-container">
+  <div class="history-header">
+    <h2>Order Management</h2>
+    <span class="order-count">{{orders.length}} Total Entries</span>
+  </div>
+
+  <div class="order-list">
+    @for(order of orders; track order.Orderid) {
+    <div class="order-card">
+      <div class="order-status-indicator"></div>
+      
+      <div class="order-section user-info">
+        <div class="user-avatar">
+          {{ order.user.name.charAt(0) | uppercase }}
+        </div>
+        <div>
+          <span class="label">CUSTOMER</span>
+          <span class="value">{{ order.user.name }}</span>
+        </div>
+      </div>
+
+      <div class="order-section">
+        <span class="label">ORDER REF</span>
+        <span class="value">#ORD-{{order.Orderid}}</span>
+        <span class="sub-value">{{order.orderDate | date:'shortTime'}}</span>
+      </div>
+
+      <div class="order-section">
+        <span class="label">TOTAL AMOUNT</span>
+        <div class="total-display">
+          <span class="method-tag">{{order.paymentMethod}}</span>
+          <span class="price">₹{{order.totalAmount}}</span>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>

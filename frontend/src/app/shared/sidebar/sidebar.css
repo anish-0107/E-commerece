@@ -1,0 +1,152 @@
+/* 1. Global Reset & Performance */
+body, html {
+  background-color: #050505; 
+  color: #e2e8f0;
+  margin: 0;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 2. Main Layout with subtle background glow */
+.layout-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, #0f0a1a 0%, #050505 100%);
+}
+
+/* 3. Sidebar - Glassmorphism Effect */
+.sidebar-zone {
+  flex: 0 0 22%; /* Slightly wider for better breathing room */
+  min-width: 280px;
+  max-width: 350px;
+  background: linear-gradient(180deg, #0d0b14 0%, #08070b 100%);
+  border-right: 1px solid rgba(139, 92, 246, 0.15); /* Translucent violet border */
+  box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+  z-index: 10;
+}
+
+.tree-sidebar {
+  padding: 2rem 1.2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 4. Inputs - Neon "Pulse" Styling */
+.sidebar-search {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: #12101c;
+  border: 1px solid #2a1b4d;
+  color: #fff;
+  font-size: 0.9rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.sidebar-search:focus {
+  border-color: #8b5cf6;
+  background: #161424;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.2), inset 0 0 8px rgba(139, 92, 246, 0.1);
+  transform: translateY(-2px);
+}
+
+/* 5. Category Tree - Modern Interactive States */
+.category-item {
+  margin: 4px 0;
+  padding: 12px 15px;
+  border-radius: 10px;
+  color: #94a3b8;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.category-item:hover {
+  background: rgba(139, 92, 246, 0.08);
+  color: #c4b5fd;
+  padding-left: 20px; /* Subtle "push" effect on hover */
+}
+
+.category-item.active {
+  background: linear-gradient(90deg, rgba(139, 92, 246, 0.2) 0%, transparent 100%);
+  border-left: 3px solid #8b5cf6;
+  color: #ffffff;
+}
+
+/* 6. Price Filter - Sophisticated Dashboard Look */
+.price-inputs {
+  margin-top: auto;
+  padding: 1.5rem;
+  background: rgba(139, 92, 246, 0.03);
+  border-radius: 16px;
+  border: 1px solid rgba(139, 92, 246, 0.1);
+}
+
+.price-inputs label {
+  color: #8b5cf6;
+  font-size: 0.7rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.input-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.price-field {
+  background: #0d0b14;
+  border: 1px solid #2a1b4d;
+  border-radius: 8px;
+  color: #fff;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  transition: border 0.3s;
+}
+
+.price-field:focus {
+  border-color: #8b5cf6;
+  outline: none;
+}
+
+/* 7. Content Zone - Spacious Grid */
+.content-zone {
+  flex: 1;
+  padding: 2.5rem;
+  background: transparent;
+  overflow-y: auto;
+}
+
+/* 8. Custom Scrollbar - Cyberpunk Minimalist */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #2a1b4d, #8b5cf6);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a78bfa;
+}
+
+/* 9. Animations */
+@keyframes neonGlow {
+  0% { box-shadow: 0 0 5px rgba(139, 92, 246, 0.2); }
+  50% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.4); }
+  100% { box-shadow: 0 0 5px rgba(139, 92, 246, 0.2); }
+}

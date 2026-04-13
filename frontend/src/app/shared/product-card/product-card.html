@@ -1,0 +1,104 @@
+@if(currentUserData){
+@if(currentUserData.role === 'user'){
+<div class="product-grid">
+    @for (prod of products; track $index) {
+    <div class="product-card">
+        <div class="product-image">
+            <img [src]="getImageUrl(prod)" [alt]="prod.name"
+                onerror="this.src='https://placehold.co/400x300?text=No+Image'">
+            @if (prod.Stockquantity <= 5) { <span class="badge low-stock">Low Stock: {{prod.Stockquantity}}</span>
+                }
+        </div>
+
+        <div class="product-info">
+            <h3 class="product-title">{{ prod.name }}</h3>
+            <p class="product-desc">{{ prod.description }}</p>
+
+            <div class="product-footer">
+                <span class="product-price">${{ prod.price }}</span>
+            </div>
+            <button (click)="addCart.emit(prod)">add to cart</button>
+            <button [routerLink]="['/user/productsDetails',prod.id]">details</button>
+        </div>
+    </div>
+    } @empty {
+    <div class="empty-state">
+        <p>No products found in this category.</p>
+    </div>
+    }
+</div>
+}
+@else{
+<div class="product-grid">
+    @for (prod of products; track $index) {
+    <div class="product-card">
+        <div class="product-image">
+            <img [src]="getImageUrl(prod)" [alt]="prod.name"
+                onerror="this.src='https://placehold.co/400x300?text=No+Image'">
+
+            @if (prod.Stockquantity <= 5) { <span class="badge low-stock">Low Stock: {{prod.Stockquantity}}</span>
+                }
+
+                <div class="admin-actions">
+                    <button class="btn-icon edit" (click)="edit.emit(prod)" title="Edit">
+                        ✎
+                    </button>
+                    <button class="btn-icon delete" (click)="delete.emit(prod)" title="Delete">
+                        ×
+                    </button>
+                </div>
+        </div>
+
+        <div class="product-info">
+            <div class="title-row">
+                <h3 class="product-title">{{ prod.name }}</h3>
+                <span class="product-price">${{ prod.price }}</span>
+            </div>
+
+            <p class="product-desc">{{ prod.description }}</p>
+
+            <div class="product-footer">
+                <span class="stock-label">In Stock: {{ prod.Stockquantity }}</span>
+                <button class="btn-view" (click)="edit.emit(prod)">Edit</button>
+                <button class="btn-view" (click)="delete.emit(prod)">delete</button>
+
+            </div>
+        </div>
+    </div>
+    } @empty {
+    <div class="empty-state">
+        <p>No products found in this category.</p>
+    </div>
+    }
+</div>
+}
+}
+@else {
+<div class="product-grid">
+    @for (prod of products; track $index) {
+    <div class="product-card">
+        <div class="product-image">
+            <img [src]="getImageUrl(prod)" [alt]="prod.name"
+                onerror="this.src='https://placehold.co/400x300?text=No+Image'">
+            @if (prod.Stockquantity <= 5) { <span class="badge low-stock">Low Stock: {{prod.Stockquantity}}</span>
+                }
+        </div>
+
+        <div class="product-info">
+            <h3 class="product-title">{{ prod.name }}</h3>
+            <p class="product-desc">{{ prod.description }}</p>
+
+            <div class="product-footer">
+                <span class="product-price">${{ prod.price }}</span>
+                <button [routerLink]="['/user/productsDetails',prod.id]">details</button>
+
+            </div>
+        </div>
+    </div>
+    } @empty {
+    <div class="empty-state">
+        <p>No products found in this category.</p>
+    </div>
+    }
+</div>
+}

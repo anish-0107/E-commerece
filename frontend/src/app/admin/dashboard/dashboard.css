@@ -1,0 +1,168 @@
+/* Container padding and background */
+.order-history-container {
+  padding: 30px;
+  background-color: #000000;
+  min-height: 100vh;
+}
+
+/* Header Section */
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #1f1b2e;
+  padding-bottom: 20px;
+}
+
+.history-header h2 {
+  color: #ffffff;
+  font-size: 1.8rem;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.order-count {
+  background: rgba(139, 92, 246, 0.1);
+  color: #a78bfa;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border: 1px solid #2a1b4d;
+}
+
+/* Order List Layout */
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* The Individual Order Card */
+.order-card {
+  background-color: #08080a;
+  border: 1px solid #1f1b2e;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  padding: 20px 25px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.order-card:hover {
+  border-color: #3c2a6e;
+  background-color: #0a0a0f;
+  transform: translateX(5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Left Indicator Bar (Violet Glow) */
+.order-status-indicator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, #6d28d9, #8b5cf6);
+  box-shadow: 2px 0 10px rgba(109, 40, 217, 0.3);
+}
+
+/* Section Spacing */
+.order-section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Customer Avatar Section */
+.user-info {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 15px;
+  flex: 1.5;
+}
+
+.user-avatar {
+  width: 45px;
+  height: 45px;
+  background: #161421;
+  border: 1px solid #2a1b4d;
+  color: #a78bfa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+/* Labels & Values */
+.label {
+  color: #64748b;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 4px;
+}
+
+.value {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.sub-value {
+  color: #475569;
+  font-size: 0.8rem;
+  margin-top: 2px;
+}
+
+/* Special Case for Reference ID */
+.order-section:nth-child(3) .value {
+  color: #a78bfa;
+  font-family: 'Monaco', monospace;
+  letter-spacing: 0.5px;
+}
+
+/* Payment & Price Section */
+.total-display {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.method-tag {
+  background-color: #050505;
+  border: 1px solid #2a1b4d;
+  color: #94a3b8;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.price {
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #8b5cf6; /* Main violet accent for price */
+}
+
+/* Responsive Tweak */
+@media (max-width: 768px) {
+  .order-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding-left: 20px;
+  }
+  
+  .order-status-indicator {
+    width: 6px;
+  }
+}

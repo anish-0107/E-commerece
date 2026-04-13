@@ -1,0 +1,30 @@
+<div class="search-container">
+  <input type="search" [formControl]="searchControl" placeholder="Enter here to search...">
+</div>
+
+
+<div class="user-grid">
+  @for (user of filtereditems; track user.id) {
+  <div class="user-card" [class.locked-border]="user.isLocked">
+    <div class="status-badge" [class.locked]="user.isLocked">
+      {{ user.isLocked ? 'Locked' : 'Active' }}
+    </div>
+
+    <div class="user-info">
+      <h3>{{ user.name }}</h3>
+      <p class="email">{{ user.email }}</p>
+      <p class="role"><span>Role:</span> {{ user.role }}</p>
+    </div>
+
+    <div class="card-actions">
+      <button (click)="toggleUserLock(user)" [class.unlock-btn]="user.isLocked" class="action-btn">
+        {{ user.isLocked ? 'Unlock User' : 'Lock User' }}
+      </button>
+    </div>
+  </div>
+  } @empty {
+  <div class="empty-state">
+    <p>No users found in the database.</p>
+  </div>
+  }
+</div>

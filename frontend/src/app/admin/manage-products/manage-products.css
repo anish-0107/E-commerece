@@ -1,0 +1,318 @@
+* {
+  box-sizing: border-box;
+}
+
+/* --- THE MAIN LAYOUT SPLIT --- */
+.layout-wrapper {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background-color: #000000; /* Base Black */
+}
+
+.sidebar-zone {
+  flex: 0 0 20%;
+  min-width: 240px;
+  max-width: 300px;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-right: 1px solid #1f1b2e; /* Dark Violet border */
+  background-color: #000000;
+}
+
+.content-zone {
+  flex: 1;
+  height: 100%;
+  padding: 25px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #050505; /* Deep Obsidian */
+}
+
+/* --- PRODUCT FORMS --- */
+.add-container {
+  background: #0a0a0c; /* Deep card background */
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #1f1b2e;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  margin-bottom: 30px;
+}
+
+.form-inline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  width: 100%;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group, .form-group-add {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label, .form-group-add label {
+  font-weight: 600;
+  font-size: 13px;
+  color: #a78bfa; /* Violet label */
+}
+
+input, select, textarea {
+  padding: 10px;
+  border: 1px solid #2a1b4d; /* Dark Violet border */
+  border-radius: 6px;
+  background: #000000; /* Pure Black Input */
+  color: #ffffff;
+}
+
+textarea { height: 100px; }
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #8b5cf6; /* Glowing Violet on focus */
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.2);
+}
+
+input.invalid { border-color: #fc8181; }
+
+/* --- EDIT MODAL OVERLAY --- */
+.edit-mode {
+  position: fixed;
+  top: 50%;
+  left: 60%; 
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 700px;
+  background: #0d0b14; /* Darker Violet-tinted Card */
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px solid #3c2a6e;
+  z-index: 1000;
+  /* Box shadow creates the dark dim effect outside */
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.7), 0 0 0 1000px rgba(0,0,0,0.8);
+}
+
+.form-header h3 {
+  color: #ffffff;
+  margin: 0;
+}
+
+.btn-close {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.btn-close:hover {
+  color: #f87171;
+}
+
+/* --- BUTTONS & ACTIONS --- */
+.btn-primary, .btn-add {
+  background: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: box-shadow 0.3s;
+}
+
+.btn-primary:hover, .btn-add:hover {
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+}
+
+.btn-cancel, .cancel-btn {
+  background: transparent;
+  border: 1px solid #2a1b4d;
+  color: #94a3b8;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.btn-cancel:hover, .cancel-btn:hover {
+  color: #f87171;
+  border-color: #f87171;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header-actions h2 {
+  color: #ffffff;
+}
+
+.separator {
+  border: none;
+  border-top: 1px solid #1f1b2e;
+  margin-bottom: 20px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+  color: #a78bfa;
+}
+
+.pagination button {
+  background: #0d0b14;
+  border: 1px solid #2a1b4d;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* 1. The Dimmed Overlay Layer */
+/* Wrapping the div inside the @if(addform) to cover the content zone */
+.add-container-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85); /* Deep dimming effect */
+  backdrop-filter: blur(4px); /* Modern glass blur */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000; /* High z-index to stay above everything */
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* 2. The Form Card (Obsidian Style) */
+.add-container-modal form.form-inline {
+  position: fixed;
+  top: 50%;
+  left: 60%; /* Offset to center within the 80% content zone */
+  transform: translate(-50%, -50%);
+  
+  background-color: #0d0b14; /* Deep Violet Black */
+  width: 90%;
+  max-width: 650px;
+  padding: 35px;
+  border-radius: 20px;
+  border: 1px solid #3c2a6e; /* Glowing border */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+  
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two column grid for a cleaner modal look */
+  gap: 20px;
+}
+
+/* 3. Handling Element Spacing */
+.form-group-add {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.full-width {
+  grid-column: span 2; /* Description and Actions take full width */
+}
+
+/* Labels and Inputs */
+.form-group-add label {
+  color: #a78bfa;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+input, select, textarea {
+  background-color: #050505;
+  border: 1px solid #2a1b4d;
+  color: #ffffff;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.2);
+}
+
+/* 4. Action Buttons Container */
+.form-actions {
+  grid-column: span 2;
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.btn-add {
+  flex: 2;
+  background: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.btn-add:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
+}
+
+.cancel-btn {
+  flex: 1;
+  background: transparent;
+  border: 1px solid #3c2a6e;
+  color: #94a3b8;
+  padding: 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cancel-btn:hover {
+  background: rgba(248, 113, 113, 0.05);
+  border-color: #f87171;
+  color: #f87171;
+}
+
+/* Character count and file text */
+.char-count, .text-success {
+  font-size: 0.7rem;
+  color: #64748b;
+  margin-top: 5px;
+  display: block;
+}
+
+/* Entrance Animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

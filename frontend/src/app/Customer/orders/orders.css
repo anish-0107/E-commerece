@@ -1,0 +1,150 @@
+/* --- CONTAINER & TITLE --- */
+.orders-container {
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  color: #ffffff;
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  letter-spacing: -0.5px;
+}
+
+/* --- GRID LAYOUT --- */
+.orders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 25px;
+}
+
+/* --- ORDER CARD --- */
+.order-card {
+  background-color: #08080a;
+  border: 1px solid #1f1b2e;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.order-card:hover {
+  border-color: #3c2a6e;
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+}
+
+/* Header: ID and Date */
+.card-header {
+  padding: 18px 20px;
+  background-color: #0d0b14; /* Slightly lighter obsidian */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #1f1b2e;
+}
+
+.order-id {
+  color: #a78bfa; /* Violet highlight */
+  font-weight: 800;
+  font-family: 'Monaco', monospace;
+  font-size: 0.9rem;
+}
+
+.order-date {
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Body: Prices and Method */
+.card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label {
+  color: #94a3b8;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.value {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.value.price {
+  color: #8b5cf6; /* Main violet price */
+  font-size: 1.1rem;
+}
+
+.value.method {
+  font-size: 0.7rem;
+  background: #161421;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid #2a1b4d;
+  letter-spacing: 0.5px;
+}
+
+.items-summary {
+  margin-top: 5px;
+  padding-top: 15px;
+  border-top: 1px dashed #1f1b2e;
+}
+
+.items-summary p {
+  color: #64748b;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* Footer: Action Button */
+.card-footer {
+  padding: 15px 20px 20px;
+}
+
+.btn-details {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #3c2a6e;
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-details:hover {
+  background: #6d28d9;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+}
+
+/* --- EMPTY STATE --- */
+.no-orders {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 100px 20px;
+  background: #050505;
+  border: 2px dashed #1f1b2e;
+  border-radius: 24px;
+}
+
+.no-orders p {
+  color: #64748b;
+  font-size: 1.1rem;
+}

@@ -1,0 +1,84 @@
+  <!-- <section class="auth-container">
+    <h3>Forgot Password?</h3>
+    <p>Enter your email to receive a reset code.</p>
+    <div class="inline-form">
+      <input type="text" #email placeholder="Enter your email">
+       <button (click)="forgotPassowrd(email.value)">Forgot password</button>
+    </div>
+  </section>
+
+  
+  <section class="auth-container">
+    <h3>Reset Credentials</h3>
+    <form [formGroup]="resetForm" (ngSubmit)="reserPassword()" class="vertical-form">
+      <div class="form-group">
+        <input type="text" formControlName="email" placeholder="Confirm Email">
+      </div>
+      <div class="form-group">
+        <input type="text" formControlName="code" placeholder="Reset Code">
+      </div>
+      <div class="form-group">
+        <input type="password" formControlName="resetPassword" placeholder="New Password">
+      </div>
+      <button type="submit" class="btn-warning">Reset Password Now</button>
+    </form>
+  </section> -->
+<div class="auth-page-wrapper">
+  
+  @if (!codeSent) {
+  <section class="auth-card">
+    <div class="lock-icon">📧</div>
+    <h3>Forgot Password?</h3>
+    <p class="subtitle">Enter your email to receive a secure reset code.</p>
+    
+    <div class="vertical-form">
+      <div class="form-group">
+        <label>Registered Email</label>
+        <input type="text" #email placeholder="anish@example.com">
+      </div>
+      <button class="btn-primary" (click)="forgotPassowrd(email.value)">
+        Send Reset Code
+      </button>
+      <button class="btn-link" routerLink="/auth/login">Back to Login</button>
+    </div>
+  </section>
+  }
+@if(resetCode) {
+  <div class="security-banner">
+    <div class="banner-content">
+      <span class="pulse-dot"></span>
+      <span class="label">Security Reset Code:</span>
+      <code class="code-text">{{ resetCode }}</code>
+    </div>
+  </div>
+}
+  @if (codeSent) {
+  <section class="auth-card highlight-border">
+    <div class="lock-icon">🛡️</div>
+    <h3>Reset Credentials</h3>
+    <p class="subtitle">Please check your inbox for the code.</p>
+
+    <form [formGroup]="resetForm" (ngSubmit)="reserPassword()" class="vertical-form">
+      <div class="form-group">
+        <label>Confirm Email</label>
+        <input type="text" formControlName="email" placeholder="Confirm Email">
+      </div>
+      
+      <div class="form-group">
+        <label>Reset Code</label>
+        <input type="text" formControlName="code" placeholder="Enter 6-digit code">
+      </div>
+      
+      <div class="form-group">
+        <label>New Password</label>
+        <input type="password" formControlName="resetPassword" placeholder="••••••••">
+      </div>
+      
+      <button type="submit" class="btn-primary" [disabled]="resetForm.invalid">
+        Update Password
+      </button>
+    </form>
+  </section>
+  }
+
+</div>

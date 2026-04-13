@@ -1,0 +1,63 @@
+<div class="tree-sidebar">
+  <div class="sidebar-title">Catalog Explorer</div>
+
+  <div class="search-container">
+    <input type="text" 
+           [(ngModel)]="searchQuery" 
+           (input)="onSearchChange($event)" 
+           placeholder="Search products..." 
+           class="sidebar-search">
+  </div>
+
+  @for (type of allTaxo; track type.id) {
+    <div class="tree-group">
+      <div class="type-header" (click)="OnselectType(type.id)">
+        <input type="checkbox" 
+               [checked]="selectedTypeId === type.id" 
+               (change)="OnselectType(type.id)" 
+               (click)="$event.stopPropagation()">
+        <span class="folder-icon">📂</span>
+        {{ type.name }}
+      </div>
+
+      <div class="tree-content">
+        @for (cat of type.categories; track cat.id) {
+          <div class="category-node">
+            <div class="category-item" [class.active]="selectedCategoryId === cat.id">
+              <span class="chevron" 
+                    [class.rotated]="isExpanded(cat.id)" 
+                    (click)="toggleCategories(cat.id)">▸</span>
+              
+              <div class="label-wrapper" (click)="OnselectCategory(cat.id)">
+                <input type="checkbox" [checked]="selectedCategoryId === cat.id" (click)="$event.stopPropagation()">
+                <span class="label-text">{{ cat.name }}</span>
+              </div>
+            </div>
+
+            @if (isExpanded(cat.id)) {
+              <ul class="sub-tree">
+                @for (sub of cat.subCategory; track sub.id) {
+                  <li class="sub-item" 
+                      [class.selected]="selectedSubCategoryId === sub.id"
+                      (click)="OnselectSubCategory(sub.id)">
+                    <input type="checkbox" [checked]="selectedSubCategoryId === sub.id" (click)="$event.stopPropagation()">
+                    <span class="leaf-icon">▫</span> {{ sub.name }}
+                  </li>
+                }
+              </ul>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  }
+
+  <div class="price-inputs">
+    <label>Price Range</label>
+    <div class="input-row">
+      <input type="number" placeholder="Min" (input)="onPriceChange()" [(ngModel)]="minPrice" class="price-field">
+      <span>-</span>
+      <input type="number" placeholder="Max" (input)="onPriceChange()" [(ngModel)]="maxPrice" class="price-field">
+    </div>
+  </div>
+</div>

@@ -1,0 +1,113 @@
+<div class="add-container">
+    <form [formGroup]="addtypeForm" (ngSubmit)="addType()" class="form-inline">
+
+        <div class="input">
+            <input type="text" formControlName="type" placeholder="Enter type name (e.g. Category, Tag)"
+                [class.invalid]="addtypeForm.get('type')?.invalid && addtypeForm.get('type')?.touched">
+        </div>
+
+        <div>
+            <button type="submit" [disabled]="addtypeForm.invalid" class="btn-add">
+                Add Type
+            </button>
+        </div>
+
+    </form>
+</div>
+<hr>
+<div class="add-container">
+  <form [formGroup]="addCtegoryForm" (ngSubmit)="addcategory()" class="form-inline">
+
+    <div class="form-group">
+      <label for="category">Category Name</label>
+      <input 
+        type="text" 
+        id="category"
+        formControlName="category" 
+        placeholder="e.g. Smartphones"
+        [class.invalid]="addCtegoryForm.get('category')?.invalid && addCtegoryForm.get('subCategoryName')?.touched">
+    </div>
+    <div class="form-group">
+      <label for="typeSelect">Parent Type</label>
+      <select 
+        id="typeSelect" 
+        formControlName="typeId"
+        [class.invalid]="addCtegoryForm.get('typeId')?.invalid && addCtegoryForm.get('typeId')?.touched">
+        <option value="" disabled selected>Choose a type...</option>
+        @for(type of allTypes; track type.id) {
+          <option [value]="type.id">{{ type.name }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="form-actions">
+      <label class="label-spacer">&nbsp;</label>
+      <button type="submit" [disabled]="addCtegoryForm.invalid" class="btn-add">
+        Add Category
+      </button>
+    </div>
+
+  </form>
+</div>
+
+<div class="add-container">
+  <form [formGroup]="addSubCateForm" (ngSubmit)="addSubCate()" class="form-inline">
+
+    <div class="form-group">
+      <label for="subCategory">Sub-Category Name</label>
+      <input 
+        type="text" 
+        id="subCategory"
+        formControlName="name" 
+        placeholder="e.g. Android Phones"
+        [class.invalid]="addSubCateForm.get('name')?.invalid && addSubCateForm.get('name')?.touched">
+    </div>
+
+    <div class="form-group">
+      <label for="categorySelect">Parent Category</label>
+      <select 
+        id="categorySelect" 
+        formControlName="categoryId"
+        [class.invalid]="addSubCateForm.get('categoryId')?.invalid && addSubCateForm.get('categoryId')?.touched">
+        
+        <option value="" disabled selected>Choose a category...</option>
+        
+        @for(cat of allCate; track cat.id) {
+          <option [value]="cat.id">{{ cat.name }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="form-actions">
+      <label class="label-spacer">&nbsp;</label>
+      <button type="submit" [disabled]="addSubCateForm.invalid" class="btn-add">
+        Add Sub-Category
+      </button>
+    </div>
+
+  </form>
+</div>
+
+<div class="card-grid">
+    @for(type of allTypes; track type.id){
+    <div class="type-card">
+        
+        <div class="card-icon">
+            {{ type.name.charAt(0).toUpperCase() }}
+        </div>
+        
+        <div class="card-content">
+            <h3 class="type-name">{{ type.name }}</h3>
+            <span class="type-id">ID: #{{ type.id }}</span>
+            
+            <button class="btn-add-cat" (click)="deleteType(type.id)">
+                 delete
+            </button>
+        </div>
+    </div>
+    } @empty {
+    <div class="empty-state">
+        <p>No types found. Add a new catalog type to get started.</p>
+    </div>
+    }
+</div>

@@ -1,0 +1,178 @@
+/* --- MAIN WRAPPER (Locked to Screen) --- */
+.layout-wrapper {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background-color: #000000; /* Deepest black base */
+}
+
+/* --- SIDEBAR ZONE (Sticky 20%) --- */
+.sidebar-zone {
+  flex: 0 0 20%;
+  min-width: 240px;
+  max-width: 300px;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-right: 1px solid #1f1b2e; /* Violet divider */
+  background-color: #050505;
+}
+
+/* --- CONTENT ZONE (Scrollable 80%) --- */
+.content-zone {
+  flex: 1;
+  height: 100%;
+  padding: 30px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #000000;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- PRODUCT CARD COMPONENT SPACING --- */
+/* This ensures your app-product-card doesn't crash into the pagination */
+app-product-card {
+  display: block;
+  min-height: 80vh;
+  margin-bottom: 40px;
+}
+
+/* --- PAGINATION (Obsidian Glass Style) --- */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  margin-top: auto; /* Pushes to bottom of content if list is short */
+  border-top: 1px solid #1f1b2e;
+  background: rgba(13, 11, 20, 0.5);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+}
+
+.pagination button {
+  background: #0d0b14;
+  border: 1px solid #2a1b4d;
+  color: #a78bfa;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: #1f1b2e;
+  border-color: #8b5cf6;
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+}
+
+.pagination button:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+  filter: grayscale(1);
+}
+
+.pagination span {
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* --- SCROLLBAR STYLING (The "Obsidian" Scroll) --- */
+.content-zone::-webkit-scrollbar,
+.sidebar-zone::-webkit-scrollbar {
+  width: 6px;
+}
+
+.content-zone::-webkit-scrollbar-track,
+.sidebar-zone::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+.content-zone::-webkit-scrollbar-thumb,
+.sidebar-zone::-webkit-scrollbar-thumb {
+  background: #1f1b2e;
+  border-radius: 10px;
+}
+
+.content-zone::-webkit-scrollbar-thumb:hover,
+.sidebar-zone::-webkit-scrollbar-thumb:hover {
+  background: #3c2a6e;
+}
+
+/* --- CONTENT ZONE (The Parent) --- */
+.content-zone {
+  flex: 1;
+  height: 100%;
+  padding: 30px;
+  overflow-y: auto; /* This allows the whole zone to scroll */
+  overflow-x: hidden;
+  background-color: #000000;
+  
+  /* CRITICAL: Stack children vertically */
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- PRODUCT CARD AREA --- */
+app-product-card {
+  display: block;
+  width: 100%;
+  /* This ensures it takes its natural height based on product count */
+  flex-shrink: 0; 
+}
+
+/* --- PAGINATION (The Bottom Anchor) --- */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  
+  /* Adds space between the last row of products and the buttons */
+  padding: 40px 0; 
+  margin-top: auto; /* Pushes to bottom if products don't fill the page */
+  
+  border-top: 1px solid #1f1b2e;
+  width: 100%;
+}
+
+/* --- BUTTON STYLING --- */
+.pagination button {
+  background: #0d0b14;
+  border: 1px solid #2a1b4d;
+  color: #a78bfa;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pagination button:hover:not(:disabled) {
+  border-color: #8b5cf6;
+  background: #161421;
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+}
+
+.pagination button:disabled {
+  opacity: 0.15;
+  cursor: not-allowed;
+  border-color: #1a1a1a;
+}
+
+.pagination span {
+  color: #94a3b8;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
