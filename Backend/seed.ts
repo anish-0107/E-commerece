@@ -53,7 +53,7 @@ export const SeedDatabse = async () => {
             name: 'Admin User',
             email: 'admin@library.com',
             passowrd: 'hashed_password_here', // In real app, use bcrypt
-            role: 'librarian'
+            role: 'admin'
         });
         await userRepo.save(user);
 
