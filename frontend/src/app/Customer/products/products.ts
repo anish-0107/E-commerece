@@ -17,6 +17,19 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 })
 export class Products implements OnInit {
 
+  /** Inclusive range start for the “showing X–Y of Z” line (1-based). */
+  get showingFrom(): number {
+    if (this.totalCount === 0) {
+      return 0;
+    }
+    return (this.currentPage - 1) * this.pageSize + 1;
+  }
+
+  /** Inclusive range end for the “showing X–Y of Z” line. */
+  get showingTo(): number {
+    return Math.min(this.currentPage * this.pageSize, this.totalCount);
+  }
+
   ngOnInit(): void {
     this.getAllproducts()
 

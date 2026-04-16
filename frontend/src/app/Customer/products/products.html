@@ -1,19 +1,65 @@
 <div class="layout-wrapper">
-
   <aside class="sidebar-zone">
     <app-sidebar (filterChanged)="onSidebarFilter($event)"></app-sidebar>
   </aside>
 
   <main class="content-zone">
+    <div class="content-inner">
+      <header class="hero">
+        <div class="hero-glow" aria-hidden="true"></div>
+        <p class="hero-eyebrow">Curated for readers &amp; collectors</p>
+        <h1 class="hero-title">
+          Discover your next
+          <span class="hero-accent">favorite</span>
+        </h1>
+        <p class="hero-sub">
+          Browse the catalog, refine with filters, and search across titles in one place.
+        </p>
+        <label class="search-field">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input
+            type="search"
+            [formControl]="searchControl"
+            class="hero-search"
+            placeholder="Search by product names..."
+            autocomplete="off"
+          />
+        </label>
+      </header>
 
+      <section class="catalog" aria-labelledby="catalog-heading">
+        <div class="catalog-head">
+          <div>
+            <h2 id="catalog-heading" class="catalog-title">Shop the shelf</h2>
+            <p class="catalog-meta">
+              @if (totalCount === 0) {
+                <span>No matches yet — try another search or filter.</span>
+              } @else {
+                <span>
+                  Showing <strong>{{ showingFrom }}–{{ showingTo }}</strong> of
+                  <strong>{{ totalCount }}</strong> titles
+                </span>
+              }
+            </p>
+          </div>
+        </div>
 
+        <app-product-card [products]="allProducts" (addCart)="addToCart($event)"></app-product-card>
 
-    <app-product-card [products]="allProducts" (addCart)="addToCart($event)">
-    </app-product-card>
-    <div class="pagination">
-      <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Prev</button>
-      <span>Page {{currentPage}}</span>
-      <button (click)="changePage(currentPage + 1)" [disabled]="(currentPage * pageSize) >= totalCount">Next</button>
+        <nav class="pagination" aria-label="Product list pagination">
+          <button type="button" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">
+            Previous
+          </button>
+          <span class="page-indicator">Page {{ currentPage }}</span>
+          <button
+            type="button"
+            (click)="changePage(currentPage + 1)"
+            [disabled]="(currentPage * pageSize) >= totalCount"
+          >
+            Next
+          </button>
+        </nav>
+      </section>
     </div>
   </main>
 </div>

@@ -8,7 +8,7 @@ import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-manage-taxonomy',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule],
   templateUrl: './manage-taxonomy.html',
   styleUrl: './manage-taxonomy.css',
 })

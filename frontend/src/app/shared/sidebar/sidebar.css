@@ -1,152 +1,358 @@
-/* 1. Global Reset & Performance */
-body, html {
-  background-color: #050505; 
-  color: #e2e8f0;
-  margin: 0;
-  font-family: 'Inter', 'Segoe UI', sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* 2. Main Layout with subtle background glow */
-.layout-wrapper {
-  display: flex;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  background: radial-gradient(circle at 50% 50%, #0f0a1a 0%, #050505 100%);
-}
-
-/* 3. Sidebar - Glassmorphism Effect */
-.sidebar-zone {
-  flex: 0 0 22%; /* Slightly wider for better breathing room */
-  min-width: 280px;
-  max-width: 350px;
-  background: linear-gradient(180deg, #0d0b14 0%, #08070b 100%);
-  border-right: 1px solid rgba(139, 92, 246, 0.15); /* Translucent violet border */
-  box-shadow: 10px 0 30px rgba(0,0,0,0.5);
-  z-index: 10;
+:host {
+  display: block;
+  height: 100%;
+  min-height: 0;
 }
 
 .tree-sidebar {
-  padding: 2rem 1.2rem;
   height: 100%;
+  min-height: 0;
   display: flex;
   flex-direction: column;
+  gap: 1rem;
+  padding: 1.1rem 1rem 1.25rem;
+  box-sizing: border-box;
 }
 
-/* 4. Inputs - Neon "Pulse" Styling */
-.sidebar-search {
-  width: 100%;
-  padding: 14px 18px;
+/* --- Header + search --- */
+.sidebar-top {
+  flex-shrink: 0;
+  padding: 1rem 1rem 1.1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(168, 85, 247, 0.22);
+  background: linear-gradient(145deg, rgba(22, 16, 38, 0.95) 0%, rgba(10, 8, 18, 0.88) 100%);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+}
+
+.sidebar-eyebrow {
+  margin: 0 0 0.35rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #c4b5fd;
+}
+
+.sidebar-title {
+  margin: 0 0 0.4rem;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #f8fafc;
+}
+
+.sidebar-hint {
+  margin: 0 0 0.85rem;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: #94a3b8;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 0.75rem;
   border-radius: 12px;
-  background: #12101c;
-  border: 1px solid #2a1b4d;
-  color: #fff;
-  font-size: 0.9rem;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  background: rgba(6, 5, 12, 0.72);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.sidebar-search:focus {
-  border-color: #8b5cf6;
-  background: #161424;
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.2), inset 0 0 8px rgba(139, 92, 246, 0.1);
-  transform: translateY(-2px);
+.search-container:focus-within {
+  border-color: rgba(168, 85, 247, 0.6);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.18);
 }
 
-/* 5. Category Tree - Modern Interactive States */
+.search-lead {
+  font-size: 1rem;
+  color: #a78bfa;
+  line-height: 1;
+  user-select: none;
+}
+
+.sidebar-search {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #f1f5f9;
+  font-size: 0.875rem;
+  font-family: inherit;
+  padding: 0.2rem 0;
+}
+
+.sidebar-search::placeholder {
+  color: #64748b;
+}
+
+/* --- Scrollable tree --- */
+.sidebar-tree-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding-right: 2px;
+  margin-right: -2px;
+}
+
+.sidebar-tree-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-tree-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-tree-scroll::-webkit-scrollbar-thumb {
+  background: rgba(88, 61, 140, 0.55);
+  border-radius: 999px;
+}
+
+.sidebar-tree-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 85, 247, 0.45);
+}
+
+.tree-group {
+  border-radius: 14px;
+  border: 1px solid rgba(55, 48, 80, 0.65);
+  background: rgba(12, 10, 20, 0.65);
+  overflow: hidden;
+}
+
+.type-header {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(42, 32, 68, 0.55);
+  background: linear-gradient(90deg, rgba(139, 92, 246, 0.12) 0%, transparent 55%);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.type-header:hover {
+  background: linear-gradient(90deg, rgba(139, 92, 246, 0.2) 0%, rgba(12, 10, 20, 0.4) 100%);
+}
+
+.type-header input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 4px;
+  accent-color: #a855f7;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.folder-icon {
+  font-size: 0.7rem;
+  color: #c4b5fd;
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+
+.type-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  letter-spacing: 0.01em;
+}
+
+.tree-content {
+  padding: 0.35rem 0.4rem 0.55rem;
+}
+
+.category-node {
+  margin: 0.15rem 0;
+}
+
 .category-item {
-  margin: 4px 0;
-  padding: 12px 15px;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  margin: 0.2rem 0;
+  padding: 0.45rem 0.45rem 0.45rem 0.35rem;
   border-radius: 10px;
   color: #94a3b8;
   font-weight: 500;
-  display: flex;
-  align-items: center;
-  transition: all 0.3s ease;
+  font-size: 0.82rem;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .category-item:hover {
-  background: rgba(139, 92, 246, 0.08);
-  color: #c4b5fd;
-  padding-left: 20px; /* Subtle "push" effect on hover */
+  background: rgba(139, 92, 246, 0.1);
+  color: #ddd6fe;
 }
 
 .category-item.active {
-  background: linear-gradient(90deg, rgba(139, 92, 246, 0.2) 0%, transparent 100%);
-  border-left: 3px solid #8b5cf6;
-  color: #ffffff;
+  background: linear-gradient(90deg, rgba(139, 92, 246, 0.22) 0%, rgba(139, 92, 246, 0.04) 100%);
+  box-shadow: inset 3px 0 0 #a855f7;
+  color: #f8fafc;
 }
 
-/* 6. Price Filter - Sophisticated Dashboard Look */
+.chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  border-radius: 6px;
+  color: #a78bfa;
+  font-size: 0.65rem;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.22s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.chevron:hover {
+  background: rgba(139, 92, 246, 0.15);
+  color: #e9d5ff;
+}
+
+.chevron.rotated {
+  transform: rotate(90deg);
+}
+
+.label-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+  padding: 0.15rem 0;
+}
+
+.label-wrapper input[type="checkbox"] {
+  width: 0.95rem;
+  height: 0.95rem;
+  accent-color: #a855f7;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.label-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sub-tree {
+  list-style: none;
+  margin: 0.15rem 0 0.35rem 1.35rem;
+  padding: 0 0 0 0.5rem;
+  border-left: 1px solid rgba(88, 61, 120, 0.45);
+}
+
+.sub-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.15rem 0;
+  padding: 0.4rem 0.5rem;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sub-item:hover {
+  background: rgba(139, 92, 246, 0.08);
+  color: #e2e8f0;
+}
+
+.sub-item.selected {
+  background: rgba(139, 92, 246, 0.18);
+  color: #faf5ff;
+  box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.25);
+}
+
+.sub-item input[type="checkbox"] {
+  width: 0.85rem;
+  height: 0.85rem;
+  accent-color: #a855f7;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.leaf-icon {
+  font-size: 0.45rem;
+  color: #a855f7;
+  opacity: 0.85;
+  flex-shrink: 0;
+}
+
+.sub-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* --- Price panel --- */
 .price-inputs {
+  flex-shrink: 0;
   margin-top: auto;
-  padding: 1.5rem;
-  background: rgba(139, 92, 246, 0.03);
-  border-radius: 16px;
-  border: 1px solid rgba(139, 92, 246, 0.1);
+  padding: 1rem 1rem 1.05rem;
+  border-radius: 14px;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  background: linear-gradient(180deg, rgba(20, 14, 34, 0.92) 0%, rgba(8, 6, 14, 0.9) 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 .price-inputs label {
-  color: #8b5cf6;
-  font-size: 0.7rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 2px;
   display: block;
-  margin-bottom: 15px;
+  margin-bottom: 0.65rem;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #c4b5fd;
 }
 
 .input-row {
   display: flex;
-  gap: 10px;
+  gap: 0.5rem;
   align-items: center;
 }
 
 .price-field {
-  background: #0d0b14;
-  border: 1px solid #2a1b4d;
-  border-radius: 8px;
-  color: #fff;
-  padding: 10px;
-  width: 100%;
+  flex: 1;
+  min-width: 0;
+  background: rgba(8, 6, 14, 0.85);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  border-radius: 10px;
+  color: #f1f5f9;
+  padding: 0.55rem 0.45rem;
+  font-size: 0.85rem;
+  font-family: inherit;
   text-align: center;
-  transition: border 0.3s;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .price-field:focus {
-  border-color: #8b5cf6;
   outline: none;
+  border-color: #a855f7;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
 }
 
-/* 7. Content Zone - Spacious Grid */
-.content-zone {
-  flex: 1;
-  padding: 2.5rem;
-  background: transparent;
-  overflow-y: auto;
+.price-field::placeholder {
+  color: #64748b;
 }
 
-/* 8. Custom Scrollbar - Cyberpunk Minimalist */
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-::-webkit-scrollbar-track {
-  background: #050505;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #2a1b4d, #8b5cf6);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #a78bfa;
-}
-
-/* 9. Animations */
-@keyframes neonGlow {
-  0% { box-shadow: 0 0 5px rgba(139, 92, 246, 0.2); }
-  50% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.4); }
-  100% { box-shadow: 0 0 5px rgba(139, 92, 246, 0.2); }
+.price-sep {
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 600;
+  flex-shrink: 0;
 }

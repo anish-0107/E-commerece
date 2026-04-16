@@ -2,14 +2,11 @@ import { Request, Response } from "express";
 import { AppDatasorce } from "../data-source";
 import { User } from "../entity/User";
 import bcrypt from "bcrypt"
-import { v4 as uuidv4 } from "uuid"
 import jwt from "jsonwebtoken"
 import { AppError } from "../utils/global-Error";
 import { sessionMap } from "../sessions/sessionStore";
 import { catchAsync } from "../utils/catchAsync";
-import path from "node:path";
-import { log } from "node:console";
-
+import nodemailer from 'nodemailer';
 const userRepo = AppDatasorce.getRepository(User)
 
 export const register = catchAsync(async (req: Request, res: Response) => {
@@ -121,6 +118,14 @@ export const logout = catchAsync(async (req: Request, res: Response) => {
     res.status(200).json({ message: "Logout Sucessfully" })
 })
 
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER, // Use environment variables!
+    pass: process.env.EMAIL_PASS, // Your 16-digit App Password
+  },
+});
+
 export const forgotPassword = catchAsync(async (req: Request, res: Response) => {
     const { email } = req.body
     const user = await userRepo.findOne({ where: { email: email } })
@@ -138,6 +143,22 @@ export const forgotPassword = catchAsync(async (req: Request, res: Response) => 
     user.codeExpiresOn = new Date(Date.now() + 5 * 60000);
     await userRepo.save(user)
 
+    const mailOptions = {
+    from: '"Your App Support" <your-email@gmail.com>',
+    to: email,
+    subject: 'Your Password Reset Code',
+    html: `
+      <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #eee;">
+        <h2>Password Reset</h2>
+        <p>You requested a password reset. Use the code below to proceed:</p>
+        <h1 style="color: #4A90E2;">${mockCode}</h1>
+        <p>This code will expire in <b>5 minutes</b>.</p>
+        <p>If you didn't request this, please ignore this email.</p>
+      </div>
+    `,
+  };
+
+  await transporter.sendMail(mailOptions);
     res.json({
         message: "Reset code generated",
         code: mockCode,
@@ -268,3 +289,16 @@ catch(err){
 }
 };
 
+const sendResetCode = async (userEmail, randomCode) => {
+  try {
+    const info = await transporter.sendMail({
+      from: '"Support" <your-email@gmail.com>',
+      to: userEmail,
+      subject: "Password Reset Code",
+      html: `<h3>Your Reset Code is:</h3><h1>${randomCode}</h1>`
+    });
+    return { success: true, messageId: info.messageId };
+  } catch (err) {
+    return { success: false, error: err };
+  }
+};
