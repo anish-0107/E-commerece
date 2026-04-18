@@ -1,6 +1,6 @@
 # E-Commerce Admin & Storefront System
 
-A modern, full-stack E-commerce management application featuring a sleek **Black & Violet** aesthetic. This system handles complex product taxonomies, transaction-safe order processing, and real-time inventory management.
+A modern, full-stack E-commerce management application featuring a sleek **Black & Violet** aesthetic. This system handles complex product taxonomies, transaction-safe order processing, and real-time inventory management, persistant cart management, user control.
 
 ---
 
@@ -27,6 +27,16 @@ A modern, full-stack E-commerce management application featuring a sleek **Black
 
 ---
 
+### 🔒 Security & Session Management
+- **Immediate Lockout:** Real-time user status monitoring; if a user is locked by an admin, the system triggers an immediate logout via RxJS stream monitoring.
+- **Session Security:** Implemented robust session handling to manage user authentication states across page refreshes.
+- **Auto-Logout logic:** Ensures that unauthorized or inactive sessions are terminated to protect user data.
+
+### 🛒 Persistent Cart Management
+- **Database-Synced Cart:** Cart items are stored in the database, allowing users to switch devices (mobile to laptop) without losing their selected products.
+- **Cart-to-Order Conversion:** Seamlessly transitions persistent cart items into `OrderItems` upon successful checkout.
+
+
 ## 🛠 Tech Stack
 
 **Frontend:**
@@ -37,7 +47,7 @@ A modern, full-stack E-commerce management application featuring a sleek **Black
 **Backend:**
 - Node.js / Express
 - TypeORM (Data Mapper Pattern)
-- PostgreSQL / MySQL
+- MySQL
 
 ---
 
